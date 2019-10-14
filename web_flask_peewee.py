@@ -1,14 +1,14 @@
 from flask import Flask, jsonify, request
-from peewee import *
 from marshmallow import Schema, fields, post_load, ValidationError, validates
 from datetime import date
+import peewee
 
-db = SqliteDatabase('people.db')
+db = peewee.SqliteDatabase('people.db')
 
 
-class Person(Model):
-    name = CharField(unique=True)
-    birthday = DateField()
+class Person(peewee.Model):
+    name = peewee.CharField(unique=True)
+    birthday = peewee.DateField()
 
     class Meta:
         database = db  # This model uses the "people.db" database.
@@ -41,7 +41,7 @@ def create_person():
             return jsonify({'errors': errors})
         data.save()
         return schema.dump(data)
-    except IntegrityError as e:
+    except peewee.IntegrityError as e:
 
         return jsonify({'errors': {'model': e.args}})
 
