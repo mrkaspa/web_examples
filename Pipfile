@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-asyncpg = "==0.18.3"
+asyncpg = "==0.21.0"
 autopep8 = "==1.4.4"
 pylint = "==2.3.1"
 sanic = "==19.6.2"
